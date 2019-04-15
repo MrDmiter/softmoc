@@ -12,6 +12,8 @@ repositories {
 }
 
 dependencies {
-    compile group: 'junit', name: 'junit', version: '4.12'
-    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+    compile group: 'junit', name: 'junit', version: '4.12'  //For annotation and asserts
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59' //For interacting with driver
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.8' //For working with .yaml
+    compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.9.8' //For working with .yaml
 }

@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import utils.YamlParser;
 
 public class LoginPage extends MainPage {
     public LoginPage(WebDriver driver) {
@@ -26,8 +27,9 @@ public class LoginPage extends MainPage {
     private WebElement invalidLoginError;
 
     public void signInWithWrongCredentials(){
-        email.sendKeys();
-        password.sendKeys();
+        waitElementToBeVisible(email);
+        email.sendKeys(YamlParser.getFile().getEmail());
+        password.sendKeys(YamlParser.getFile().getPassword());
         submit.click();
         Assert.assertTrue(invalidLoginError.isDisplayed());
     }
