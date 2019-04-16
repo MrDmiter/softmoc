@@ -28,9 +28,16 @@ public class LoginPage extends MainPage {
 
     public void signInWithWrongCredentials(){
         waitElementToBeVisible(email);
+        email.sendKeys(YamlParser.getFile().getWrongEmail());
+        password.sendKeys(YamlParser.getFile().getWrongPassword());
+        submit.click();
+        Assert.assertTrue(invalidLoginError.isDisplayed());
+    }
+    public MyAccountPage signInWithRightCredentials(){
+        waitElementToBeVisible(email);
         email.sendKeys(YamlParser.getFile().getEmail());
         password.sendKeys(YamlParser.getFile().getPassword());
         submit.click();
-        Assert.assertTrue(invalidLoginError.isDisplayed());
+        return new MyAccountPage(driver);
     }
 }

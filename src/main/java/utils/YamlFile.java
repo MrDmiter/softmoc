@@ -4,6 +4,8 @@ public class YamlFile {
     private String url;
     private String email;
     private String password;
+    private String wrongEmail;
+    private String wrongPassword;
 
     YamlFile(){
 
@@ -30,5 +32,21 @@ public class YamlFile {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getWrongEmail() {
+        return wrongEmail;
+    }
+
+    public void setWrongEmail(String wrongEmail) {
+        this.wrongEmail = wrongEmail;
+    }
+
+    public String getWrongPassword() {
+        return wrongPassword;
+    }
+
+    public void setWrongPassword(String wrongPassword) {
+        this.wrongPassword = wrongPassword;
     }
 }

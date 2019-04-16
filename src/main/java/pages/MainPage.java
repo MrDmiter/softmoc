@@ -1,5 +1,6 @@
 package pages;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -11,25 +12,25 @@ public class MainPage {
     protected WebDriver driver;
     private WebDriverWait wait;
 
-    public MainPage(WebDriver driver){
-        this.driver=driver;
+    public MainPage(WebDriver driver) {
+        this.driver = driver;
         PageFactory.initElements(driver, this);
         wait = new WebDriverWait(driver, 10);
     }
 
-    public void waitElementToBeClickable(WebElement element){
+    public void waitElementToBeClickable(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    public void waitElementToBeVisible(WebElement element){
+    public void waitElementToBeVisible(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public void verifyPresenceOnPage(String pageTitle){
-        driver.getTitle().equalsIgnoreCase(pageTitle);
+    public void verifyPresenceOnPage(String expectedPageTitle, String url) {
+        wait.until(ExpectedConditions.urlMatches(url));
+        String actualTitle = driver.getTitle();
+        Assert.assertEquals(expectedPageTitle, actualTitle);
     }
-
-
 
 
 }
