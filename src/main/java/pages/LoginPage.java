@@ -7,10 +7,13 @@ import org.openqa.selenium.support.FindBy;
 import utils.YamlParser;
 
 public class LoginPage extends MainPage {
+
+    //Construtor
     public LoginPage(WebDriver driver) {
         super(driver);
     }
 
+    //Web elements
     @FindBy(xpath = "//input[@placeholder='Email']")
     private WebElement email;
 
@@ -26,6 +29,9 @@ public class LoginPage extends MainPage {
     @FindBy(xpath = "//p[@class='form-error small-12 columns']")
     private WebElement invalidLoginError;
 
+    /**
+     * Sign in with wrong creds
+     */
     public void signInWithWrongCredentials(){
         waitElementToBeVisible(email);
         email.sendKeys(YamlParser.getFile().getWrongEmail());
@@ -33,6 +39,11 @@ public class LoginPage extends MainPage {
         submit.click();
         Assert.assertTrue(invalidLoginError.isDisplayed());
     }
+
+    /**
+     * Sign in with right creds
+     * @return My account page entity
+     */
     public MyAccountPage signInWithRightCredentials(){
         waitElementToBeVisible(email);
         email.sendKeys(YamlParser.getFile().getEmail());

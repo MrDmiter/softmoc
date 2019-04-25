@@ -12,9 +12,19 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class MainPage {
 
+    //Web driver field
     protected WebDriver driver;
+    //Web driver wait field
     private WebDriverWait wait;
 
+    //Constructor
+    public MainPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+        wait = new WebDriverWait(driver, 10);
+    }
+
+    //Web elements
     @FindBy(xpath = "//nav[@id='main-menu']//ul[@role='menubar']/li/a[text()='WOMENS']")
     public WebElement womensTopBarTab;
 
@@ -25,27 +35,26 @@ public class MainPage {
     public WebElement kidsTopBarTab;
 
 
-
-    public MainPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-        wait = new WebDriverWait(driver, 10);
-    }
-
+    //Wait till element is clickable
     public void waitElementToBeClickable(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
+    //Wait till element is visible
     public void waitElementToBeVisible(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public void verifyPresenceOnPage(String expectedPageTitle, String url) {
-        wait.until(ExpectedConditions.urlMatches(url));
+    //Check presence on the page
+    public void verifyPresenceOnPage(String expectedPageTitle) {
         String actualTitle = driver.getTitle();
         Assert.assertEquals(expectedPageTitle, actualTitle);
     }
 
+    /**
+     * Hover over passed tabName (DEPRECATED)
+     * @param tabName
+     */
     public void hoverOverTopBarTab(String tabName){
         Actions action = new Actions(driver);
         switch (tabName.toUpperCase()){

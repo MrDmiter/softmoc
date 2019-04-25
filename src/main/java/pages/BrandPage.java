@@ -1,7 +1,6 @@
 package pages;
 
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,6 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BrandPage extends MainPage {
+
+    //Constructor
+    public BrandPage(WebDriver driver) {
+        super(driver);
+    }
 
     //Web elements
     @FindBy(xpath = "//ul[@class='block-grid column brands']/li/a/img")
@@ -34,20 +38,14 @@ public class BrandPage extends MainPage {
     public List<WebElement> categoriesOnBrandPage;
 
 
-    //Constructor
-    public BrandPage(WebDriver driver) {
-        super(driver);
-    }
-
-
     /**
-     * Verify presence of the main logo of the brand on the Brands page
+     * Verify presence of the main logo of the brand on the Brands page by picture extension
      */
     public void verifyPresenceOfBrandsLogo() {
         ArrayList<WebElement> list = new ArrayList<>(brandsIcons);
         for (WebElement element : list) {
             String pathToImage = element.getAttribute("src");
-            Assert.assertTrue(pathToImage.contains(".jpg"));
+            Assert.assertTrue(pathToImage.contains(".jpg") | pathToImage.contains(".gif"));
         }
     }
 
@@ -55,7 +53,7 @@ public class BrandPage extends MainPage {
      * Verify amount of the brands on page
      */
     public void verifyTotalAmountOfBrandsOnPage() {
-        Assert.assertEquals(91, brandContainer.size());
+        Assert.assertEquals(94, brandContainer.size());
     }
 
     /**
@@ -68,6 +66,7 @@ public class BrandPage extends MainPage {
             String lowerCAseLetter = element.getText().toLowerCase();
             if (!(element.getAttribute("class").equalsIgnoreCase("disable-toggle"))) {
                 element.click();
+                //Can`t find better approach
                 try {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
